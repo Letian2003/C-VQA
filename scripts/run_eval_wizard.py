@@ -139,7 +139,7 @@ device = "cuda"
 
 load_8bit: bool = False
 
-base_model = PATH_TO_WIZARDCODER
+base_model = PATH_TO_MODEL
 
 tokenizer = AutoTokenizer.from_pretrained(base_model)
 if device == "cuda":

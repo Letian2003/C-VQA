@@ -130,7 +130,7 @@ Only answer with a function starting def execute_command.
 print("loading codellama...")
 
 device = "cuda"
-model_id = PATH_TO_CODELLAMA
+model_id = PATH_TO_MODEL
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 tokenizer.pad_token = " "
