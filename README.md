@@ -47,3 +47,17 @@ python download_model.py
 ```
 
 You can add more code generators in `download_model.py` by adding models in repo_ids and local_dirs.
+
+
+### Citation
+
+If this code is useful for your research, please consider citing our work.
+
+```
+@InProceedings{zhang2023cvqa,
+    author    = {Zhang, Letian and Zhai, Xiaotong and Zhao, Zhongkai and Wen, Xin and Zhao, Bingchen},
+    title     = {What If the TV Was Off? Examining Counterfactual Reasoning Abilities of Multi-Modal Language Models},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops},
+    year      = {2023}
+}
+```
