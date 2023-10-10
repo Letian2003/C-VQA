@@ -44,7 +44,7 @@ def main():
     progs, new_progs = [], []
     html_strs, new_html_strs = [], []
     for (img_path, query, new_query) in tzip(img_paths, queries, new_queries):
-        img = Image.open('PATH_TO_IMAGES + img_path)
+        img = Image.open(PATH_TO_IMAGES + img_path)
         init_state = dict(
             IMAGE=img.convert('RGB')
         )

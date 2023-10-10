@@ -290,8 +290,8 @@ def main():
                 'new_response': new_result})
             
             writer_code.writerow({
-                'code': code, 
-                'new code': new_code})
+                'code': code[0], 
+                'new code': new_code[0]})
 
             
             res_f.flush()
