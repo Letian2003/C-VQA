@@ -27,11 +27,11 @@ The `scripts` directory contains all required scripts for running models in the 
 
 Before you run the a script, install the corresponding model and get the weights. Then put the script in the root directory of the model.
 
-You should change `PATH_TO_IMAGES` in the scripts to the actual directory of images.
+Please change `PATH_TO_IMAGES` in the scripts to the actual directory of images.
 
-You should change `PATH_TO_MODEL` in the scripts for ViperGPT with different code generators to the actual directory of models.
+Please change `PATH_TO_MODEL` in the scripts for ViperGPT with different code generators to the actual directory of models.
 
-For example, to run BLIP on C-VQA, you should run this command in the root directory of LLaVa:
+For example, to run BLIP on C-VQA, use run this command in the root directory of LLaVa:
 
 ```python
 python run_eval_lavis.py --model-name blip2_t5 --model-type pretrain_flant5xxl --query PATH_TO_CSV_FILE
