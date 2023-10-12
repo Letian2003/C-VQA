@@ -1,6 +1,6 @@
 # C-VQA: Counterfactual Reasoning VQA Dataset
 
-This is the code and data for C-VQA.
+This is the code and data for the paper [What If the TV Was Off? Examining Counterfactual Reasoning Abilities of Multi-modal Language Models](https://arxiv.org/abs/2310.06627).
 
 ## Dataset
 
