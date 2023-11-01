@@ -2,7 +2,7 @@ import argparse
 from minigpt4.common.config import Config
 from minigpt4.common.dist_utils import get_rank
 from minigpt4.common.registry import registry
-from minigpt4.conversation.conversation import Chat, CONV_VISION
+from minigpt4.conversation.conversation import Chat, CONV_VISION_minigptv2, CONV_VISION_Vicuna0, CONV_VISION_LLama2
 
 # imports modules for registration
 from minigpt4.datasets.builders import *
@@ -78,14 +78,14 @@ def main():
     for (img_path, query, new_query) in tzip(img_paths, queries, new_queries):
         img_path = PATH_TO_IMAGES + img_path
         # upload image
-        chat_state = CONV_VISION.copy()
+        chat_state = CONV_VISION_minigptv2.copy()
         img_list = []
         llm_message = chat.upload_img(img_path, chat_state, img_list)
         # print(llm_message)
 
         # ask a question
         chat.ask(query, chat_state)
-
+        chat.encode_img(img_list)
         # get answer
         response = chat.answer(conv=chat_state,
                                 img_list=img_list,
@@ -98,14 +98,14 @@ def main():
         responses.append(response)
 
         # upload image
-        chat_state = CONV_VISION.copy()
+        chat_state = CONV_VISION_minigptv2.copy()
         img_list = []
         llm_message = chat.upload_img(img_path, chat_state, img_list)
         # print(llm_message)
 
         # ask a question
         chat.ask(new_query, chat_state)
-
+        chat.encode_img(img_list)
         # get answer
         response = chat.answer(conv=chat_state,
                                 img_list=img_list,
