@@ -2594,7 +2594,7 @@ COCO_val2014_000000399741.jpg,How many people in the picture?,11,How many people
 COCO_val2014_000000399864.jpg,How many trees are in the picture?,6,How many trees would there be if 3 trees were added to the picture?,9,direct
 COCO_val2014_000000399991.jpg,How many players are in this picture?,1,How many players would there be if 2 players were added to the picture?,3,direct
 COCO_val2014_000000400046.jpg,How many children are there?,22,How many children would there be if 10 children were removed?,12,direct
-COCO_val2014_000000400123.jpg,"How many S patterns are on the plate?""",8,How many S patterns would there be if the number of S patterns doubled?,16,direct
+COCO_val2014_000000400123.jpg,"How many S patterns are on the plate?",8,How many S patterns would there be if the number of S patterns doubled?,16,direct
 COCO_val2014_000000400456.jpg,How many horses are there?,1,How many horses would there be if 2 more horses were added?,3,direct
 COCO_val2014_000000400552.jpg,How many tools hanging from the fireplace?,2,How many tools would be hanging from the fireplace if 1 tool was removed?,1,direct
 COCO_val2014_000000400567.jpg,How many computing devices are present?,2,How many computing devices would be present if both devices were replaced with new ones?,2,direct
