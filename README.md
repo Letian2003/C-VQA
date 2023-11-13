@@ -38,7 +38,7 @@ For example, to run BLIP on C-VQA, use run this command in the root directory of
 python run_eval_lavis.py --model-name blip2_t5 --model-type pretrain_flant5xxl --query PATH_TO_CSV_FILE
 ```
 
-After you get the results, you can run `get_results.py` to get quantitative results.
+After you get the results, you can run `calc_acc.py` to get quantitative results.
 
 ### Download Code Generator Models
 
