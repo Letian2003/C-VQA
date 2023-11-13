@@ -25,6 +25,7 @@ The `scripts` directory contains all required scripts for running models in the 
 - `run_eval_visprog.py`: [VisProg](https://github.com/allenai/visprog).
 - `run_eval_wizard.py`: ViperGPT with [WizardCoder](https://github.com/nlpxucan/WizardLM/tree/main/WizardCoder).
 
+
 Before you run a script, install the corresponding model and get the weights. Then put the script in the root directory of the model.
 
 Please change `PATH_TO_IMAGES` in the scripts to the actual directory of images.
@@ -36,6 +37,8 @@ For example, to run BLIP on C-VQA, use run this command in the root directory of
 ```python
 python run_eval_lavis.py --model-name blip2_t5 --model-type pretrain_flant5xxl --query PATH_TO_CSV_FILE
 ```
+
+After you get the results, you can run `get_results.py` to get quantitative results.
 
 ### Download Code Generator Models
 
