@@ -1,5 +1,6 @@
 import csv
 
+# formatted response files
 files = [
     'C-VQA_vipergpt_results.csv', 
     'C-VQA_visprog_results.csv',
