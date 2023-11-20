@@ -39,6 +39,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Demo")
     parser.add_argument("--cfg_path", required=True, help="path to configuration file.")
     parser.add_argument("--query", type=str, required=True)
+    parser.add_argument("--type", type=str, required=True)
     parser.add_argument("--gpu_id", type=int, default=0, help="specify the gpu to load the model.")
     parser.add_argument("--num_beams", type=int, default=1)
     parser.add_argument("--temperature", type=int, default=1)
@@ -52,6 +53,8 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+def make_prompt(prompt):
+    return "Based on the image, respond to this question with a single word or phrase: "+ prompt
 
 def main():
 
@@ -76,15 +79,18 @@ def main():
     img_paths, queries, new_queries = load_query_file(args.query)
     responses, new_responses = [], []
     for (img_path, query, new_query) in tzip(img_paths, queries, new_queries):
-        img_path = PATH_TO_IMAGES + img_path
+        
+        img_path = os.path.join(PATH_TO_IMAGES, img_path)
         # upload image
         chat_state = CONV_VISION_minigptv2.copy()
         img_list = []
         llm_message = chat.upload_img(img_path, chat_state, img_list)
         # print(llm_message)
 
+        q1 = make_prompt(query)
+
         # ask a question
-        chat.ask(query, chat_state)
+        chat.ask(q1, chat_state)
         chat.encode_img(img_list)
         # get answer
         response = chat.answer(conv=chat_state,
@@ -94,7 +100,6 @@ def main():
                                 max_new_tokens=300,
                                 max_length=2000)[0]
 
-        # print(response)
         responses.append(response)
 
         # upload image
@@ -103,25 +108,28 @@ def main():
         llm_message = chat.upload_img(img_path, chat_state, img_list)
         # print(llm_message)
 
+        q2 = make_prompt(new_query)
         # ask a question
-        chat.ask(new_query, chat_state)
+        chat.ask(q2, chat_state)
         chat.encode_img(img_list)
         # get answer
-        response = chat.answer(conv=chat_state,
+        new_response = chat.answer(conv=chat_state,
                                 img_list=img_list,
                                 num_beams=args.num_beams,
                                 temperature=args.temperature,
                                 max_new_tokens=300,
                                 max_length=2000)[0]
 
-        # print(response)
-        new_responses.append(response)
+        new_responses.append(new_response)
+
+        # print(q1, ":" , response)
+        # print(q2, ":" ,new_response)
 
     # add responses and new_responses as new columns to the dataframe
     df = pd.read_csv(args.query)
     df['response'] = responses
     df['new_response'] = new_responses
-    df.to_csv('{}_responses_{}.csv'.format(args.query.split('/')[-1].split('.')[0], args.cfg_path.split('/')[-1]), index=False)
+    df.to_csv('{}_responses.csv'.format(args.type), index=False)
 
 
 if __name__ == "__main__":

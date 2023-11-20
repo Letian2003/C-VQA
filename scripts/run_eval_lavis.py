@@ -31,9 +31,23 @@ def parse_args():
     parser.add_argument("--model-name", default="blip2_vicuna_instruct")
     parser.add_argument("--model-type", default="vicuna7b")
     parser.add_argument("--query", type=str, required=True)
+    parser.add_argument("--type", type=str, required=True)
     args = parser.parse_args()
     return args
 
+def make_prompt(prompt):
+    prompt = "Question: " + prompt + " Short answer:"
+    return prompt
+
+# def make_prompt_syn(prompt):
+#     prompt =  "Question: "+ prompt
+#     prompt = prompt.replace('Select the correct answer', 'Options')
+#     prompt = prompt.replace('A:', '(a)')
+#     prompt = prompt.replace('B:', '(b)')
+#     prompt = prompt.replace('C:', '(c)')
+#     prompt = prompt.replace('D:', '(d)')
+#     prompt = prompt + ". Answer:"
+#     return prompt
 
 def main():
     args = parse_args()
@@ -50,12 +64,14 @@ def main():
     img_paths, queries, new_queries = load_query_file(args.query)
     responses, new_responses = [], []
     for (img_path, query, new_query) in tzip(img_paths, queries, new_queries):
-        img_path = PATH_TO_IMAGES + img_path
+        img_path = os.path.join(PATH_TO_IMAGES, img_path)
         image = vis_processors["eval"](load_image(img_path)).unsqueeze(0).cuda()
 
+        q1 = make_prompt(query)
+
         samples = {
             "image": image,
-            "prompt": query,
+            "prompt": q1,
         }
 
         output = model.generate(
@@ -68,12 +84,15 @@ def main():
             top_p=top_p,
             use_nucleus_sampling=False,
         )
-        # print(output[0])
         responses.append(output[0])
 
+        # print(q1,":",output[0])
+
+        q2 = make_prompt(new_query)
+
         samples = {
             "image": image,
-            "prompt": new_query,
+            "prompt": q2,
         }
 
         output = model.generate(
@@ -86,14 +105,15 @@ def main():
             top_p=top_p,
             use_nucleus_sampling=False,
         )
-        # print(output[0])
         new_responses.append(output[0])
+
+        # print(q2,":",output[0])
 
     # add responses and new_responses as new columns to the dataframe
     df = pd.read_csv(args.query)
     df['response'] = responses
     df['new_response'] = new_responses
-    df.to_csv('{}_responses_{}_{}.csv'.format(args.query.split('/')[-1].split('.')[0], args.model_name, args.model_type), index=False)
+    df.to_csv('{}_responses.csv'.format(args.type), index=False)
 
 
 if __name__ == "__main__":
