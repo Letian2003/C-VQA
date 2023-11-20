@@ -48,7 +48,7 @@ For example, to run BLIP on C-VQA, run this command in the root directory of LLa
 python run_eval_lavis.py --model-name blip2_t5 --model-type pretrain_flant5xxl --query PATH_TO_CSV_FILE
 ```
 
-You can find more commands in [scripts/README](scripts/READMD.md).
+You can find more commands in [scripts/README](scripts/README.md).
 
 After you get the results, run `format_response.py` to convert raw responses to formatted responses (a single number or a single `yes` or `no`). Then run `calc_acc.py` to get quantitative results of the formatted responses. Remenber to fill in file names in these two scripts.
 
