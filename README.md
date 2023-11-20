@@ -42,7 +42,7 @@ Please change `PATH_TO_IMAGES` in the scripts to the actual directory of images.
 
 Please change `PATH_TO_MODEL` in the scripts for ViperGPT with different code generators to the actual directory of models.
 
-For example, to run BLIP on C-VQA, run this command in the root directory of LLaVa:
+For example, to run BLIP on C-VQA, run this command in the root directory of LLaVA:
 
 ```python
 python run_eval_lavis.py --model-name blip2_t5 --model-type pretrain_flant5xxl --query PATH_TO_CSV_FILE
