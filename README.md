@@ -55,7 +55,7 @@ After you get the results, run `format_response.py` to convert raw responses to 
 
 ### Download Code Generator Models
 
-Change YOUR_HUGGINGFACE_TOKEN in `download_model.py` to your huggingface token. Then run:
+Change YOUR_HUGGINGFACE_TOKEN in `download_model.py` to your Hugging Face token. Then run:
 
 ```
 pip install huggingface_hub
